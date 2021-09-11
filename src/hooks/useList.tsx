@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
+import { BaseRepo, Params } from "../repositories/Base";
 interface Pagination {
   currentPage: number;
   skip: number;
@@ -11,7 +12,7 @@ interface Pagination {
   }[];
 }
 
-export default function useList<ItemType>(contentType: string = "car") {
+export default function useList<ItemType>(repo: BaseRepo, params?: Params) {
   const [items, setItems] = useState<ItemType[]>([]);
   const [pagination, setPagination] = useState<Pagination>({
     currentPage: 1,
@@ -21,22 +22,19 @@ export default function useList<ItemType>(contentType: string = "car") {
     pages: [],
   });
 
+  const getItems = async () => {
+    const data = await repo.getAll<ItemType>(pagination, params);
+    setItems(data.items);
+    const totalPages = Math.ceil(data.total / pagination.perPage);
+    setPagination({
+      ...pagination,
+      totalPages,
+    });
+  };
+
   useEffect(() => {
-    (function () {
-      fetch(
-        `https://cdn.contentful.com/spaces/5jo55pzix7dl/environments/master/entries?access_token=kLs7q43KVc1rnH70ugLXV-w-pIJcSM9lOY2gT8PyvZk&content_type=${contentType}&limit=${pagination.perPage}&skip=${pagination.skip}`
-      )
-        .then((results) => results.json())
-        .then((data) => {
-          setItems(data.items);
-          const totalPages = Math.ceil(data.total / pagination.perPage);
-          setPagination({
-            ...pagination,
-            totalPages,
-          });
-        });
-    })();
-  }, [pagination.currentPage]);
+    getItems();
+  }, [pagination.currentPage, params?.value]);
 
   useEffect(() => {
     (function () {

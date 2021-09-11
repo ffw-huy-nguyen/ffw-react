@@ -12,12 +12,13 @@ interface Pagination {
 }
 
 
+
 export default function withListItems<ItemType>(RenderedComponent: React.ComponentType<{items: ItemType[]}>, contentType: string) {
-  interface StateTypes {
+  type stateType = {
     items: ItemType[];
     pagination: Pagination;
   }
-  return class ListItems extends Component<{}, StateTypes> {
+  return class ListItems extends Component<{}, stateType> {
     constructor(props: {}) {
       super(props);
       this.state = {
@@ -97,7 +98,7 @@ export default function withListItems<ItemType>(RenderedComponent: React.Compone
       this.getItems();
     }
 
-    componentDidUpdate(prvProp: {}, prevState: StateTypes) {
+    componentDidUpdate(prvProp: {}, prevState: stateType) {
       if (
         this.state.pagination.currentPage !== prevState.pagination.currentPage
       ) {
