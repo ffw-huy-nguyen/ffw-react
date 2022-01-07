@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.grid-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-column--2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-column--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-column--4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
