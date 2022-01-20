@@ -1,5 +1,5 @@
 const TYPES = {
-	IHttp : Symbol.for("HttpInterface"),
+  IProductApi: Symbol.for("ProductApiInterface"),
 };
 
-export default TYPES
+export default TYPES;

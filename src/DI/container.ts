@@ -1,9 +1,11 @@
 import { Container } from "inversify";
 import "reflect-metadata";
-import IHttp from "../repositories/IHttp";
-import Http from "../repositories/FetchHttp";
+import { IPostApi } from "../apis/Api.interface";
+import Posts from "../apis/Post";
+import MockPost from "../apis/MockPost";
 import TYPES from "./types";
 
-const container = new Container();
-container.bind<IHttp>(TYPES.IHttp).to(Http);
-export default container
+const container = new Container({ skipBaseClassChecks: true });
+container.bind<IPostApi>(TYPES.IProductApi).to(Posts);
+
+export default container;
