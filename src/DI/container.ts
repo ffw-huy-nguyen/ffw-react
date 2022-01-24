@@ -6,6 +6,6 @@ import MockPost from "../apis/MockPost";
 import TYPES from "./types";
 
 const container = new Container({ skipBaseClassChecks: true });
-container.bind<IPostApi>(TYPES.IProductApi).to(Posts);
+container.bind<IPostApi>(TYPES.IProductApi).to(MockPost);
 
 export default container;

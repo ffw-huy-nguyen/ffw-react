@@ -11,8 +11,11 @@ class Api implements IApi {
     return await res.json();
   }
 
-  getDetail(): string {
-    return "";
+  async getDetail<ItemType>(id: string): Promise<ItemType> {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/${this.path}/${id}`
+    );
+    return await res.json();
   }
 
   create(): string {

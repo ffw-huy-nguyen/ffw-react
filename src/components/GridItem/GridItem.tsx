@@ -7,7 +7,6 @@ const GridItem = ({
   items: IGridItem[];
   column: number;
 }) => {
-  console.log("grid items", items);
   const perPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [paginatedItems, setPaginatedItems] = useState<IGridItem[]>([]);

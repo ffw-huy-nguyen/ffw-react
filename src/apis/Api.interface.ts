@@ -1,7 +1,7 @@
 export interface IApi {
   getAll<ItemType>(): Promise<ItemType[]>;
 
-  getDetail(): string;
+  getDetail<ItemType>(id: string): Promise<ItemType>;
 
   create(): string;
 

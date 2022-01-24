@@ -12,20 +12,13 @@ function App() {
   useEffect(() => {
     const getPosts = async () => {
       const response = await postApi.getAll();
-      const response2 = {
-        comp1: [],
-        comp2: [],
-        comp3: []
-      }
       console.log("response", response);
-  
     };
     getPosts();
   }, []);
   return (
     <>
       <GridItem items={items} column={4} />
-     
     </>
   );
 }

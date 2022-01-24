@@ -125,13 +125,19 @@ const data = [
 class MockPost implements IPostApi {
   async getAll<ItemType>(): Promise<ItemType[]> {
     return await new Promise((resolve) => {
-      // @ts-ignore
-      resolve(data);
+      resolve(data as unknown as ItemType[]);
     });
   }
 
-  getDetail(): string {
-    return "";
+  async getDetail<ItemType>(id: string): Promise<ItemType> {
+    const detail = {
+      name: "Item 29",
+      image:
+        "https://thienanblog.com/wp-content/uploads/2017/10/react-logo.png",
+    };
+    return await new Promise((resolve) => {
+      resolve(detail as unknown as ItemType);
+    });
   }
 
   create(): string {

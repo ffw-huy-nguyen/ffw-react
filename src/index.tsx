@@ -2,10 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+import Home from "./pages/Home";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="blog/:blogId" element={<BlogDetail />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
